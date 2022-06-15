@@ -1,4 +1,4 @@
-Tecra notes
+Tecra note
 
 class classname
 {
