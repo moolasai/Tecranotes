@@ -1,3 +1,5 @@
+Tecra notes
+
 class classname
 {
 	public void method_name(parameters) //access_specifer return_type method_name
