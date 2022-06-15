@@ -1,4 +1,4 @@
-Hello Ramesh
+
 Tecra note
 
 class classname
