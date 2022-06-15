@@ -1,0 +1,342 @@
+class classname
+{
+	public void method_name(parameters) //access_specifer return_type method_name
+		{
+		
+		}
+}
+class_name obj_name = new classname(); //obj creation 
+
+//sealed classes cannotbe inherited 
+//using interface we can do multiple inheritance
+//abstract classes can have abstract, virtual, normal methods in the body
+//abstract class will not allow us to create an instance (object)
+//exception
+//partial class (incomplete), we can create two or more classes with same name 
+//Delegate
+syntax delgate class class_name();// declare out of the namespace
+//console app -----> .exe (only for executing)
+//library -----> .dll (use for sharing or reusabilty)
+//list can store, remove, delete. it allows to have duplicates
+//hashset cannot have dupliactes(they are not sorted)
+//Sortedset cannot have duplicates (they are sorted)
+//stack (LIFO)
+//queue (FIFO)--> enqueue(insertion),dequeue(deletion)
+
+SQL SERVER --> storing database
+
+web server --> use to deploy the webpages
+database server --> use to store the data
+
+MS SQL
+MY SQL
+Oracle
+
+SQl --> Language use to communicate with RDBMS
+
+Window OS
+Window Server OS  	
+
+Shared Server --> multiple clients are connected 
+Independent Server --> single client is connected
+
+C#.NET --> Logics
+SQL --> Commands
+
+Creating a database
+	CREATE DATABASE DB_VNR
+
+click on execute
+
+DATABASE --> TABLES
+
+creating a table 
+	CREATE TABLE TABLE_NAME
+TABLES --> FIELDS
+FIELDS --> DATATYPES
+
+
+//DATATYPES --> IN MY SQL
+		Integer --> 0 - 9 --> tinyint smallint int bigint
+								 1		 2	    4	 8
+		Floating --> 0.00 --> numeric, decimal, float and real
+
+		datetime --> date, time, datetime
+		
+		boolean --> bit(true,false) or (0,1)
+
+		string --> char, varchar, nchar, nvarchar
+Declare @x tinyint = 256 arthematic overflow 
+print @x
+
+Declare @x Numeric(5,2) = 25.21
+print@x
+
+Decalre @x Numeric(18,2) = 12 -->  12.00
+
+Numeric(p,s) -->//p - precision(total number of digits), s - scale(digits after decimal point)
+Numeric maximum can store of max 38 including after the values of the decimal
+
+char --> fixed length datatype(unicode)
+
+varchar --> variable length(unicode) 
+
+nchar --> fixed(non unicode)
+nvarchar --> Variable(non unicode)
+
+example for table
+	USE DATABASE_NAME //TO STORE THE TABLE IN A PARTICULAR DATABASE  
+	CREATE TABLE TABLE_NAME
+	(	
+		SNO INT,
+		NAME VARCHAR(50),
+		EMAIL_ID NVARCHAR(50),
+		DOB DATE,
+		STD_LOGIN DATETIME,
+		ROLL_NO VARCHAR(50),
+		STATUS BIT,
+		FEE DECIMAL(18,2)
+	)
+//DISPLAY TABLE
+	SELECT * FROM TABLE_NAME
+//INSERTION
+	INSERT INTO TABLE_NAME VALUES(1,'RAM','RAM@GMAIL.COM','01/23/2003',GATDATE(),'20071A05J9',1,1000)
+	INSERT INTO TABLE_NAME (SN0,NAME,STD_LOGIN) VALUES (2,'SHIVA',1)
+
+
+cONSTRAINTS IN SQL
+
+	1 . NOT NULL --> will not allow null values
+	EX : SNO INT NOT NULL
+	
+	2 . UNIQUE --> will not allow duplicates
+	EX : SNO INT NOT NULL UNIQUE 
+
+	3. CHECK --> TO CHECK THE CONDITION
+	EX
+		
+	4 . DEFAULT --> WHEN THE VALUE IS NOT GIVEN, THE DAFAULT ASSIGNED VALUE WILL BE INSERTED
+	EX : ADDRESS VARCHAR(50) DEFAULT 'HYD'
+
+	5 . IDENTIFY --> (auto increment) USE TO INCREMENT THE VALUE AND THERE IS NO NEED TO GIVE THE VALUE MANUALLY
+	EX : SNO INT IDENTITY ( 1 , 1 ) //starts with one and increments by 1.
+	
+	6 . PRIMARY KEY --> LINK ANOTHER TABLE
+	EX : SNO INT PRIMARY KEY (IN TABLE1)
+	     SNO INT FOREIGN KEY REFERENCES TABLE1(SNO)	
+			
+
+UPDATING THE DATA :
+	EX : UPDATE TABLE_NAME SET FEE=2000 , ROLLNO=30 WHERE SNO=1
+
+DELETING THE DATE :
+	EX : DELETE FROM TABLE_NAME WHERE SNO=1
+
+TRUNCATE CANNOT DELETE THE ROW, IT CAN DELETE ONLT THE WHOLE DATA(ROWS) OF THE TABLE (COLUMNS ARE NOT DELETED)
+	EX : TRUNACTE TABLE TABLE_NAME
+
+DROP WILL DELETE THE WHOLE STRUCTURE
+	EX : DROP TABLE TABLE_NAME
+
+ALTER --> MODIFYING THE EXISTING STRUCTURE
+	ADD COLUMN
+	EX : ALTER TABLE TABLE_NAME ADD COLUMN_NAME DATATYPE
+	REMOVE COLUMN
+	EX : ALTER TABLE TABLE_NAME DROP COLUMN COLUMN_NAME
+CHANGING THE DATATYPE
+	EX : ALTER TABLE TABLE_NAME ALTER COLUMN COLUMN_NAME NEW_DATATYPE
+ADDING CONSTRAINT TO EXISTING TABLE
+	EX : ALTER TABLE TABLE_NAME ADD UNIQUE(NAME)
+	EX : ALTER TABLE TABLE_NAME DROP CONSTRAINT CONTRAINT_ID//REMOVING CONTRAINT
+
+EXAMPLE QUARIES :
+SELECT * FROM ORDERS ORDER BY CustomerID DE
+SELECT * FROM ORDERS WHERE ORDERDATE BETWEEN '01/01/1997' AND '12/31/1997' 
+SELECT * FROM ORDERS WHERE ORDERDATE NOT BETWEEN '01/01/1997' AND '12/31/1997' 
+SELECT * FROM ORDERS WHERE CUSTOMWER_ID IN ('hanar','alfki','tomsp') ORDER BY 
+SELECT * FROM ORDERS WHERE CUSTOMWER_ID NOT IN ('hanar','alfki','tomsp') ORDER BY 
+SELECT * FROM ORDERS WHERE CUSTOMWER_ID CUSTOMER_ID = 'TOMSP' AND EMPLOYEE_ID = 5 
+SELECT * FROM BOOKS1 UNION SELECT * FROM BOOKS2 //DO NOT DISPLAY DUPLICATES (BOTH THE TABLES SHOULD HAVE SAME FIELDS)
+SELECT * FROM BOOKS1 UNION SELECT * FROM BOOKS2 //DISPLAY DUPLICATES ( BOTH THE TABLES SHOULD HAVE SAME FIELDS )
+
+
+
+JOINS IN SQL
+
+	--PK FK
+	TO GET THE DATA
+LEFT JOIN --> ALL THE DATA FROM THE LEFT TABLE AND COMMON VALUE OF LEFT DATA IN RIGHT TABLE
+
+RIGHT JOIN --> VICE VERSA
+
+FULL JOIN --> ALL DATA
+
+GROUP BY --> SIMILAR DATA IS CONSIDERED AS A GROUP 
+	CONDITIONS : 
+			1 . SELECT LIST MUST BE IN GROUP BY 
+			2 . IF SELECT LIST IS NOT IN GROUP NY .AGG FUNCTION
+
+STORED PROCEDURES AND FUNCTONS IN SQL (SECURITY)
+	CREATE PROCEDURE SP_NAME(OPTNL PM) AS BEGIN --CODE END
+	EX : CRATE PROCEDURE SP(@EMP_NO INT)
+		 AS
+		 BEGIN
+			SELECT * FROMO EMP WHERE EMP_NO=@EMPNO
+		 END	
+	//EXECUTION --> EXEC SP(1) //EXEC SP (IF NO PARAMETERS)
+	//WE CAN ALSO USE PROCEDURE IN THE FRONT END
+	//SP_HELPTEXT PROCEDURE_NAME (EXECTING THIS WE CAN SEE THE CODE WRITTEN IN THE IN THE PROCEDURE)
+	//DROP PROCEDURE PROCEDURE_NAME (DELETE THE PROCEDURE FROM THE DATABASE)
+
+FUNCTIONS IN SQL 
+	EVERY FUNCTION SHOULD RETURN A VALUE
+	EX : CREATE FUNCTION FUNCTION_NAME(@DEPT_NO INT)
+		 RETURNS VARCHAR(50)
+		 AS
+		 BEGIN
+		 DECLARE @GET_DNAME VARCHAR(50) SET @GET_DNAME = (SELECT D_NAME FROM DEPT WHERE DEPT_NO = @DEPT_NO)
+		 RETURN @GET-DNAME
+		 END
+
+05/30/2022
+
+ADO.NET --> Tool (Connects frontend and backend)--> CURD OPERATIONS
+
+SET of classes
+classes are from dll files (dll-->namespace-->classes--methods)
+1. Connection (Establish the connection from frontend to backend)
+2. Command --> Insert ,upadte,delete and select operations
+3. Data Reader
+4. Data Adapter -->
+	(
+		1.Reading complete data from database
+		2.when displaing bulk of data
+		3.with any condition
+
+		control --> DataGridTable
+	)
+5. Data Table
+6. Data set
+
+Windows form Application
+	Web Application
+	
+Asp.net (Windows forms Application)
+	-->ConnectionString	
+		1.Server name 
+		2.database name
+		3.username
+		4.password
+
+open and close
+
+
+HTML AND CSS
+
+CSS : 
+	1.inline --> personally
+	2.internal
+		1.tag
+		2.class
+		3.ID
+	3.external
+		1.tag
+		2.class
+		3.ID
+Pages
+
+1.Static --> HTML purly static
+2.Dynamic --> Change Content
+
+Dynamic --> Designer HTML
+Code Behind --> Backend Logic
+
+Login --> Register Link --> Forget Password Link
+
+1.Register 
+2.server
+3.Designing Page
+4.Backend Logic
+
+Inserting Data
+1.Adding namespace
+2.connection
+
+
+Web page --> login & register
+Add item master page in login(.master)
+(homes)--> web form using master page (.aspx)
+======================================================
+1.required validators -->empty box
+
+* requiredFeildValidator
+* controlToValidate
+* error message
+* forecolor
+
+2. Range validator --> we also have maximum value and minimum value
+
+3. compare validator --> checking to text boxes
+
+4. Regular Expression
+	1.Name --> alphabets
+	2.email -->@.org
+	3.ph no --> 10 digits
+5.Custom Validator --> event -->write your own c# logic
+
+if(args.value.Length<10)
+{
+args.IsValid=false;
+}
+else
+{args.Isvalid=true;}
+
+
+
+
+countryform.aspx
+<asp:DropDownLis id="" runat=""><ddl>
+
+ddlcountry.DataTextField =country
+ddlcountry.DataValueFeild="countryID"
+
+<ContentTemplate> --> instead of sending the whole page to the database we can only send the triggered content
+<Triggers><asp:AsyncPostBackTrigger controlID="ddlstate"/></Triggers> 
+0</contentTemplates>
+
+
+
+
+SESSION IN Asp.net 
+
+Variable used to hold the data
+Login Name & Login Time in a session Variable
+
+sending an to while getting login
+
+
+
+FORGET PASSWORD
+
+1.checking the email from the database 
+2.send otp
+3.verifying the otp
+4.change password 
+
+
+GITHUB:
+
+after creating an account download github  desktop
+
+clone repository
+copy and paste the file in the clone repository (the clone path)
+commit
+publish
+go to pages - select source as main - url will be provided 
+
+
+
+
+
+
+
